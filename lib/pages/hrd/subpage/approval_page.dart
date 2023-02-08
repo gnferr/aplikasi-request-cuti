@@ -27,7 +27,10 @@ class _ApprovalPageState extends State<ApprovalPage> {
         elevation: 0,
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection("users").snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection("users")
+            .orderBy('AjuanCuti.status', descending: false)
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Container(
@@ -76,9 +79,9 @@ class _ApprovalPageState extends State<ApprovalPage> {
                               DocumentSnapshot data =
                                   snapshot.data!.docs[index];
                               final Timestamp timeStart =
-                                  data["cuti_start"] as Timestamp;
+                                  data['AjuanCuti']["cuti_start"] as Timestamp;
                               final Timestamp timeEnd =
-                                  data["cuti_end"] as Timestamp;
+                                  data['AjuanCuti']["cuti_end"] as Timestamp;
 
                               final DateTime dateStart = timeStart.toDate();
                               final DateTime dateEnd = timeEnd.toDate();
@@ -88,17 +91,18 @@ class _ApprovalPageState extends State<ApprovalPage> {
                               final cutiEnd =
                                   DateFormat('dd-MM-yyyy').format(dateEnd);
 
-                              final totalCuti = data['getcuti'];
+                              final totalCuti = data['AjuanCuti']['getcuti'];
 
-                              if (data['status'] == "pending") {
+                              if (data['AjuanCuti']['status'] == "pending") {
                                 status = StatusPending();
-                              } else if (data['status'] == "accepted") {
+                              } else if (data['AjuanCuti']['status'] ==
+                                  "accepted") {
                                 status = StatusAccepted();
                               } else {
                                 status = StatusRejected();
                               }
                               if (data['role'] == 'karyawan') {
-                                if (data['getcuti'] != 0) {
+                                if (data['AjuanCuti']['getcuti'] != 0) {
                                   return Stack(
                                     children: [
                                       Card(
@@ -173,7 +177,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                         height: 3,
                                                       ),
                                                       Text(
-                                                        "Jumlah Cuti: ${data['getcuti']} Hari",
+                                                        "Jumlah Cuti: ${data['AjuanCuti']['getcuti']} Hari",
                                                         style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 15),
@@ -200,7 +204,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                               const EdgeInsets
                                                                   .all(8.0),
                                                           child: Text(
-                                                            '${data['description']}',
+                                                            '${data['AjuanCuti']['description']}',
                                                             overflow:
                                                                 TextOverflow
                                                                     .clip,
@@ -209,184 +213,245 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                       )
                                                     ],
                                                   ),
+                                                  //
+                                                  // Button Accept / Reject //
+                                                  //
                                                   Container(
-                                                    width: 110,
-                                                    child: data['status'] ==
-                                                                'accepted' ||
-                                                            data['status'] ==
-                                                                'rejected'
-                                                        ? Container()
-                                                        : Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceAround,
-                                                            children: [
-                                                                InkWell(
-                                                                  onTap: () {
-                                                                    showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (ctx) =>
-                                                                              AlertDialog(
-                                                                        shape: RoundedRectangleBorder(
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(10)),
-                                                                        title: Text(
-                                                                            "Are you sure?"),
-                                                                        content:
-                                                                            Text("Anda akan menolak pengajuan cuti ini!"),
-                                                                        actions: <
-                                                                            Widget>[
-                                                                          ElevatedButton(
+                                                      width: 110,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          if (data['AjuanCuti']
+                                                                  ['status'] ==
+                                                              'accepted') ...[
+                                                            Container(),
+                                                          ] else if (data[
+                                                                      'AjuanCuti']
+                                                                  ['status'] ==
+                                                              'pending') ...[
+                                                            Column(children: [
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (ctx) =>
+                                                                            CupertinoAlertDialog(
+                                                                      title: Text(
+                                                                          "Are you sure?"),
+                                                                      content: Text(
+                                                                          "Anda akan menolak pengajuan cuti ini!"),
+                                                                      actions: <
+                                                                          Widget>[
+                                                                        CupertinoDialogAction(
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.pop(context);
+                                                                          },
+                                                                          child:
+                                                                              Text(
+                                                                            "Cancel",
                                                                             style:
-                                                                                ElevatedButton.styleFrom(backgroundColor: color[0].red),
-                                                                            onPressed:
-                                                                                () {
-                                                                              Navigator.pop(context);
-                                                                            },
-                                                                            child:
-                                                                                Text("Cancel"),
+                                                                                TextStyle(fontWeight: FontWeight.w500, color: Colors.red.shade700),
                                                                           ),
-                                                                          ElevatedButton(
-                                                                            style:
-                                                                                ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                                                                            onPressed:
-                                                                                () async {
-                                                                              await listcuti.doc(data.id).update({
-                                                                                "status": "rejected"
-                                                                              });
-                                                                              Navigator.of(ctx).pop();
-                                                                              Future.delayed(
-                                                                                  Duration(seconds: 1),
-                                                                                  () => showDialog(
-                                                                                      context: context,
-                                                                                      builder: (context) => AlertDialog(
-                                                                                            shape: RoundedRectangleBorder(
-                                                                                              borderRadius: BorderRadius.circular(10),
-                                                                                            ),
-                                                                                            content: SizedBox(
-                                                                                              height: 100,
-                                                                                              child: Column(
-                                                                                                children: [
-                                                                                                  Image.asset('assets/images/cancel.png', scale: 8),
-                                                                                                  SizedBox(
-                                                                                                    height: 10,
-                                                                                                  ),
-                                                                                                  Text('Berhasil menolak permohonan cuti!', style: TextStyle(color: color[0].darkblue, fontWeight: FontWeight.w500))
-                                                                                                ],
-                                                                                              ),
-                                                                                            ),
-                                                                                          )));
-                                                                              showDialog(
-                                                                                context: context,
-                                                                                builder: (context) => AlertDialog(
-                                                                                    shape: RoundedRectangleBorder(
-                                                                                      borderRadius: BorderRadius.circular(10),
-                                                                                    ),
-                                                                                    elevation: 0,
-                                                                                    backgroundColor: Colors.transparent,
-                                                                                    content: Center(child: CircularProgressIndicator())),
-                                                                              );
-                                                                              Future.delayed(Duration(milliseconds: 800), () => Navigator.pop(context));
-                                                                            },
-                                                                            child:
-                                                                                Text("OK"),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                  child: Image.asset(
-                                                                      'assets/images/cancel.png',
-                                                                      scale:
-                                                                          11),
-                                                                ),
-                                                                InkWell(
-                                                                  onTap: () {
-                                                                    showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (ctx) =>
-                                                                              AlertDialog(
-                                                                        shape: RoundedRectangleBorder(
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(10)),
-                                                                        title: Text(
-                                                                            "Are you sure?"),
-                                                                        content:
-                                                                            Text("Anda akan menerima pengajuan cuti ini!"),
-                                                                        actions: <
-                                                                            Widget>[
-                                                                          ElevatedButton(
-                                                                            style:
-                                                                                ElevatedButton.styleFrom(backgroundColor: color[0].red),
-                                                                            onPressed:
-                                                                                () {
-                                                                              Navigator.of(ctx).pop();
-                                                                            },
-                                                                            child:
-                                                                                Text("Cancel"),
-                                                                          ),
-                                                                          ElevatedButton(
-                                                                            style:
-                                                                                ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                                                                            onPressed:
-                                                                                () async {
-                                                                              await listcuti.doc(data.id).update({
-                                                                                "status": "accepted",
-                                                                                "cuti": FieldValue.increment(-totalCuti)
-                                                                              });
-                                                                              Navigator.of(ctx).pop();
+                                                                        ),
+                                                                        CupertinoDialogAction(
+                                                                          onPressed:
+                                                                              () async {
+                                                                            await listcuti.doc(data.id).update({
+                                                                              "AjuanCuti.status": "rejected"
+                                                                            });
 
-                                                                              Future.delayed(
-                                                                                  Duration(seconds: 1),
-                                                                                  () => showDialog(
-                                                                                      context: context,
-                                                                                      builder: (context) => AlertDialog(
-                                                                                            shape: RoundedRectangleBorder(
-                                                                                              borderRadius: BorderRadius.circular(10),
-                                                                                            ),
-                                                                                            content: SizedBox(
-                                                                                              height: 100,
-                                                                                              child: Column(
-                                                                                                children: [
-                                                                                                  Image.asset('assets/images/check.png', scale: 8),
-                                                                                                  SizedBox(
-                                                                                                    height: 10,
-                                                                                                  ),
-                                                                                                  Text('Berhasil menerima permohonan cuti!', style: TextStyle(color: color[0].darkblue, fontWeight: FontWeight.w500))
-                                                                                                ],
-                                                                                              ),
-                                                                                            ),
-                                                                                          )));
-                                                                              showDialog(
-                                                                                context: context,
-                                                                                builder: (context) => AlertDialog(
-                                                                                    shape: RoundedRectangleBorder(
-                                                                                      borderRadius: BorderRadius.circular(10),
-                                                                                    ),
-                                                                                    elevation: 0,
-                                                                                    backgroundColor: Colors.transparent,
-                                                                                    content: Center(child: CircularProgressIndicator())),
-                                                                              );
-                                                                              Future.delayed(Duration(milliseconds: 800), () => Navigator.pop(context));
-                                                                            },
-                                                                            child:
-                                                                                Text("OK"),
+                                                                            const snackbar =
+                                                                                SnackBar(
+                                                                              content: Text('Berhasil Menolak Ajuan Cuti!'),
+                                                                              behavior: SnackBarBehavior.floating,
+                                                                            );
+                                                                            Navigator.pop(context);
+                                                                            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                                                                          },
+                                                                          child:
+                                                                              Text(
+                                                                            "OK",
+                                                                            style:
+                                                                                TextStyle(fontWeight: FontWeight.w500, color: Colors.green.shade700),
                                                                           ),
-                                                                        ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  );
+                                                                },
+                                                                child: Image.asset(
+                                                                    'assets/images/cancel.png',
+                                                                    scale: 11),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 15,
+                                                              ),
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (ctx) =>
+                                                                            CupertinoAlertDialog(
+                                                                      title: Text(
+                                                                          "Are you sure?"),
+                                                                      content: Text(
+                                                                          "Anda akan menerima pengajuan cuti ini!"),
+                                                                      actions: <
+                                                                          Widget>[
+                                                                        CupertinoDialogAction(
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.of(ctx).pop();
+                                                                          },
+                                                                          child:
+                                                                              Text(
+                                                                            "Cancel",
+                                                                            style:
+                                                                                TextStyle(fontWeight: FontWeight.w500, color: Colors.red.shade700),
+                                                                          ),
+                                                                        ),
+                                                                        CupertinoDialogAction(
+                                                                          onPressed:
+                                                                              () async {
+                                                                            await listcuti.doc(data.id).update({
+                                                                              "AjuanCuti.status": "accepted",
+                                                                              "AjuanCuti.cuti": FieldValue.increment(-totalCuti)
+                                                                            });
+
+                                                                            const snackbar =
+                                                                                SnackBar(
+                                                                              content: Text('Berhasil Menerima Ajuan Cuti!'),
+                                                                              behavior: SnackBarBehavior.floating,
+                                                                            );
+                                                                            Navigator.pop(context);
+                                                                            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                                                                            // Navigator.of(ctx).pop();
+                                                                            // Future.delayed(
+                                                                            //     Duration(seconds: 1),
+                                                                            //     () => showDialog(
+                                                                            //         context: context,
+                                                                            //         builder: (context) => AlertDialog(
+                                                                            //               title: Center(
+                                                                            //                 child: Text('Success!', style: TextStyle(color: color[0].darkblue, fontWeight: FontWeight.w500)),
+                                                                            //               ),
+                                                                            //               shape: RoundedRectangleBorder(
+                                                                            //                 borderRadius: BorderRadius.circular(10),
+                                                                            //               ),
+                                                                            //               content: SizedBox(
+                                                                            //                 height: 120,
+                                                                            //                 child: Image.network('https://cdn-icons-png.flaticon.com/512/3472/3472620.png', scale: 4),
+                                                                            //               ),
+                                                                            //             )));
+                                                                            // showDialog(
+                                                                            //   context: context,
+                                                                            //   builder: (context) => AlertDialog(
+                                                                            //       shape: RoundedRectangleBorder(
+                                                                            //         borderRadius: BorderRadius.circular(10),
+                                                                            //       ),
+                                                                            //       elevation: 0,
+                                                                            //       backgroundColor: Colors.transparent,
+                                                                            //       content: Center(child: CircularProgressIndicator())),
+                                                                            // );
+                                                                            // Future.delayed(Duration(milliseconds: 800), () => Navigator.pop(context));
+                                                                          },
+                                                                          child:
+                                                                              Text(
+                                                                            "OK",
+                                                                            style:
+                                                                                TextStyle(fontWeight: FontWeight.w500, color: Colors.green.shade700),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  );
+                                                                },
+                                                                child: Image.asset(
+                                                                    'assets/images/check.png',
+                                                                    scale: 11),
+                                                              ),
+                                                            ]),
+                                                          ] else ...[
+                                                            InkWell(
+                                                              onTap: () {
+                                                                showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder: (ctx) =>
+                                                                      CupertinoAlertDialog(
+                                                                    title: Text(
+                                                                        "Are you sure?"),
+                                                                    content: Text(
+                                                                        "Anda akan menghapus data ini!"),
+                                                                    actions: <
+                                                                        Widget>[
+                                                                      CupertinoDialogAction(
+                                                                        onPressed:
+                                                                            () {
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                        },
+                                                                        child:
+                                                                            Text(
+                                                                          "Cancel",
+                                                                          style: TextStyle(
+                                                                              fontWeight: FontWeight.w500,
+                                                                              color: Colors.red.shade700),
+                                                                        ),
                                                                       ),
-                                                                    );
-                                                                  },
-                                                                  child: Image.asset(
-                                                                      'assets/images/check.png',
-                                                                      scale:
-                                                                          11),
-                                                                ),
-                                                              ]),
-                                                  )
+                                                                      CupertinoDialogAction(
+                                                                        onPressed:
+                                                                            () async {
+                                                                          await listcuti
+                                                                              .doc(data.id)
+                                                                              .update({
+                                                                            "AjuanCuti.status":
+                                                                                "pending",
+                                                                            "AjuanCuti.description":
+                                                                                "",
+                                                                            "AjuanCuti.getcuti":
+                                                                                0,
+                                                                          });
+
+                                                                          const snackbar =
+                                                                              SnackBar(
+                                                                            content:
+                                                                                Text('Berhasil Menghapus Ajuan Cuti!'),
+                                                                            behavior:
+                                                                                SnackBarBehavior.floating,
+                                                                          );
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                          ScaffoldMessenger.of(context)
+                                                                              .showSnackBar(snackbar);
+                                                                        },
+                                                                        child:
+                                                                            Text(
+                                                                          "OK",
+                                                                          style: TextStyle(
+                                                                              fontWeight: FontWeight.w500,
+                                                                              color: Colors.green.shade700),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                );
+                                                              },
+                                                              child: Image.network(
+                                                                  'https://cdn-icons-png.flaticon.com/512/4041/4041994.png',
+                                                                  scale: 11),
+                                                            ),
+                                                          ]
+                                                        ],
+                                                      ))
+                                                  //========END OF=======//
+                                                  // Button Acc / Reject //
                                                 ],
                                               ),
                                             )),

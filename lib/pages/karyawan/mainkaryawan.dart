@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -23,28 +24,32 @@ class _MainKaryawanState extends State<MainKaryawan> {
               onTap: () {
                 showDialog(
                   context: context,
-                  builder: (ctx) => AlertDialog(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                  builder: (ctx) => CupertinoAlertDialog(
                     title: Text("Are you sure?"),
                     content: Text("Anda yakin ingin keluar? O_o"),
                     actions: <Widget>[
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: color[0].red),
+                      CupertinoDialogAction(
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.red.shade700),
+                        ),
                         onPressed: () {
-                          Navigator.of(ctx).pop();
+                          Navigator.pop(context);
                         },
-                        child: Text("Cancel"),
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green),
+                      CupertinoDialogAction(
+                        child: Text(
+                          'OK',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.green.shade700),
+                        ),
                         onPressed: () async {
                           await FirebaseAuth.instance.signOut();
                           context.goNamed('login');
                         },
-                        child: Text("OK"),
                       ),
                     ],
                   ),

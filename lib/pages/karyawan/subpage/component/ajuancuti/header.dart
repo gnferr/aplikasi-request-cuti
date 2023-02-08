@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../provider/model/color_pallete.dart';
+import '../../../../../provider/model/color_pallete.dart';
 
-class HeaderDetail extends StatelessWidget {
-  const HeaderDetail({super.key});
+class HeaderPengajuanCuti extends StatelessWidget {
+  const HeaderPengajuanCuti({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +18,14 @@ class HeaderDetail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Informasi',
+                  'Pengajuan',
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: color[0].darkblue),
                 ),
                 Text(
-                  'Saya',
+                  'Cuti',
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,

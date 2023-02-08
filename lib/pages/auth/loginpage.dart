@@ -25,50 +25,6 @@ class MainLogin extends StatelessWidget {
 
       return firebaseApp;
     }
-    // void login() {
-    //   User? user = FirebaseAuth.instance.currentUser;
-    //   var userlogin = FirebaseFirestore.instance
-    //       .collection('users')
-    //       .doc(user!.uid)
-    //       .get()
-    //       .then((DocumentSnapshot documentSnapshot) {
-    //     if (documentSnapshot.exists) {
-    //       if (documentSnapshot.get('role') == "karyawan") {
-    //         context.go("/karyawan");
-    //       } else {
-    //         context.go("/hrd");
-    //       }
-    //     }
-    //   });
-    // }
-
-    // void tesLogin(String email, String password) async {
-    //   UserCredential userCredential =
-    //       await FirebaseAuth.instance.signInWithEmailAndPassword(
-    //     email: email,
-    //     password: password,
-    //   );
-    //   login();
-    // }
-
-    // void signIn(String email, String password) async {
-    //   if (_formKey.currentState!.validate()) {
-    //     try {
-    //       UserCredential userCredential =
-    //           await FirebaseAuth.instance.signInWithEmailAndPassword(
-    //         email: email,
-    //         password: password,
-    //       );
-    //       login();
-    //     } on FirebaseAuthException catch (e) {
-    //       if (e.code == 'user-not-found') {
-    //         print('No user found for that email.');
-    //       } else if (e.code == 'wrong-password') {
-    //         print('Wrong password provided for that user.');
-    //       }
-    //     }
-    //   }
-    // }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -79,35 +35,11 @@ class MainLogin extends StatelessWidget {
           ),
           child: Column(
             children: [
-              // ElevatedButton(
-              //     onPressed: () async {
-              //       User? user = await FireAuth.signInWithEmailPassword(
-              //           email: 'nut@gmail.com',
-              //           password: 'disnat',
-              //           context: context);
-              //       var userlogin = FirebaseFirestore.instance
-              //           .collection('users')
-              //           .doc(user!.uid)
-              //           .get()
-              //           .then((DocumentSnapshot documentSnapshot) {
-              //         if (documentSnapshot.exists) {
-              //           if (documentSnapshot.get('role') == "karyawan") {
-              //             context.go("/karyawan");
-              //           } else {
-              //             context.go("/hrd");
-              //           }
-              //         }
-              //       });
-
-              //       // signIn(_emailText.text,
-              //       //     _passwordText.text);
-              //     },
-              //     child: Text('Login Hrd')),
               ElevatedButton(
                   onPressed: () async {
                     User? user = await FireAuth.signInWithEmailPassword(
-                        email: 'soyami@gmail.com',
-                        password: 'soyami',
+                        email: 'hrd@gmail.com',
+                        password: 'hrd123',
                         context: context);
                     var userlogin = FirebaseFirestore.instance
                         .collection('users')
@@ -122,21 +54,27 @@ class MainLogin extends StatelessWidget {
                         }
                       }
                     });
-                    // showDialog(
-                    //   context: context,
-                    //   builder: (context) => AlertDialog(
-                    //       shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(10),
-                    //       ),
-                    //       elevation: 0,
-                    //       backgroundColor: Colors.transparent,
-                    //       content: Center(child: CircularProgressIndicator())),
-                    // );
-                    // Future.delayed(Duration(milliseconds: 800),
-                    //     () => Navigator.pop(context));
-
-                    // signIn(_emailText.text,
-                    //     _passwordText.text);
+                  },
+                  child: Text('Login Hrd')),
+              ElevatedButton(
+                  onPressed: () async {
+                    User? user = await FireAuth.signInWithEmailPassword(
+                        email: 'ryan@gmail.com',
+                        password: 'ryan123',
+                        context: context);
+                    var userlogin = FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(user!.uid)
+                        .get()
+                        .then((DocumentSnapshot documentSnapshot) {
+                      if (documentSnapshot.exists) {
+                        if (documentSnapshot.get('role') == "karyawan") {
+                          context.go("/karyawan");
+                        } else {
+                          context.go("/hrd");
+                        }
+                      }
+                    });
                   },
                   child: Text('Login Karyawan')),
               Expanded(
@@ -275,7 +213,6 @@ class MainLogin extends StatelessWidget {
                                   TextFormField(
                                     controller: _passwordText,
                                     obscureText: true,
-                                    enableSuggestions: false,
                                     validator: (value) =>
                                         Validator.validatePassword(
                                             password: value.toString()),
@@ -358,24 +295,24 @@ class MainLogin extends StatelessWidget {
                                   SizedBox(
                                     height: 15,
                                   ),
-                                  // Text.rich(
-                                  //   TextSpan(
-                                  //     text: "Don't have an account? ",
-                                  //     style: TextStyle(
-                                  //         fontWeight: FontWeight.w500),
-                                  //     children: [
-                                  //       TextSpan(
-                                  //           text: 'Sign Up',
-                                  //           style: TextStyle(
-                                  //               fontWeight: FontWeight.bold,
-                                  //               color: Colors.blue),
-                                  //           recognizer: TapGestureRecognizer()
-                                  //             ..onTap = () {
-                                  //               context.go("/register");
-                                  //             })
-                                  //     ],
-                                  //   ),
-                                  // )
+                                  Text.rich(
+                                    TextSpan(
+                                      text: "Don't have an account? ",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500),
+                                      children: [
+                                        TextSpan(
+                                            text: 'Sign Up',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.blue),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () {
+                                                context.go("/register");
+                                              })
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
                             ),

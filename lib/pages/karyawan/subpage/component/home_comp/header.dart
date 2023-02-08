@@ -1,19 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../provider/model/color_pallete.dart';
+import '../../../../../provider/model/color_pallete.dart';
 
-class WelcomeHRD extends StatefulWidget {
-  const WelcomeHRD({super.key});
+class HeaderMainKaryawan extends StatefulWidget {
+  const HeaderMainKaryawan({super.key});
 
   @override
-  State<WelcomeHRD> createState() => _WelcomeHRDState();
+  State<HeaderMainKaryawan> createState() => _HeaderMainKaryawanState();
 }
 
-FirebaseAuth user = FirebaseAuth.instance;
-var userdata = user.currentUser;
-
-class _WelcomeHRDState extends State<WelcomeHRD> {
+class _HeaderMainKaryawanState extends State<HeaderMainKaryawan> {
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,12 +27,12 @@ class _WelcomeHRDState extends State<WelcomeHRD> {
               Text(
                 "Welcome,",
                 style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 35,
                     fontWeight: FontWeight.bold,
                     color: color[0].darkblue),
               ),
               Text(
-                "${userdata!.displayName}",
+                "${user!.displayName}",
                 style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -62,7 +61,7 @@ class _WelcomeHRDState extends State<WelcomeHRD> {
                 margin: EdgeInsets.only(left: 8, top: 8),
                 child: CircleAvatar(
                   radius: 60,
-                  backgroundImage: AssetImage('assets/images/user.png'),
+                  backgroundImage: NetworkImage("${user!.photoURL}"),
                 ),
               ),
             ],

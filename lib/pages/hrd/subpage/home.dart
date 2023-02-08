@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tugas_akhir/pages/hrd/component/home_comp/list_menu.dart';
-import 'package:tugas_akhir/pages/hrd/component/home_comp/welcome.dart';
+import 'package:tugas_akhir/pages/hrd/subpage/component/home_comp/list_menu.dart';
+import 'package:tugas_akhir/pages/hrd/subpage/component/home_comp/welcome.dart';
 
 class HomeHrd extends StatefulWidget {
   HomeHrd({super.key});

@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../provider/model/color_pallete.dart';
+import '../../../../../provider/model/color_pallete.dart';
 
 class BodyDetail extends StatefulWidget {
   const BodyDetail({super.key});
@@ -71,7 +71,7 @@ class _BodyDetailState extends State<BodyDetail> {
                                 child: CircleAvatar(
                                   radius: 50,
                                   backgroundImage:
-                                      AssetImage("${user.photoURL}"),
+                                      NetworkImage("${user.photoURL}"),
                                 ),
                               ),
                             ],
@@ -160,7 +160,9 @@ class _BodyDetailState extends State<BodyDetail> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
-                                        Text(snapshot.data!['cuti'].toString(),
+                                        Text(
+                                            snapshot.data!['AjuanCuti']['cuti']
+                                                .toString(),
                                             style: TextStyle(
                                                 fontSize: 40,
                                                 fontWeight: FontWeight.bold,
@@ -204,107 +206,102 @@ class _ColumInputanState extends State<ColumInputan> {
   @override
   Widget build(BuildContext context) {
     User? user1 = FirebaseAuth.instance.currentUser;
-    return StreamBuilder<Object>(
+    return StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
             .collection('users')
             .doc(user1!.uid)
             .snapshots(),
-        builder: (context, snapshot) {
-          TextEditingController noHp = TextEditingController();
-          TextEditingController alamat = TextEditingController();
+        builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasData) {
+            final noHp =
+                TextEditingController(text: snapshot.data!['phone_number']);
+            final alamat =
+                TextEditingController(text: snapshot.data!['address']);
+            return Form(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 50,
+                    child: TextFormField(
+                      controller: noHp,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        labelStyle: TextStyle(color: color[0].darkblue),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1.5, color: color[0].darkblue),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 1.5),
+                        ),
+                        labelText: 'No Handphone',
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    child: TextFormField(
+                      controller: alamat,
+                      maxLines: 3,
+                      decoration: InputDecoration(
+                        labelStyle: TextStyle(color: color[0].darkblue),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1.5, color: color[0].darkblue),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 1.5),
+                        ),
+                        labelText: 'Alamat',
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5))),
+                          onPressed: () {
+                            CollectionReference user =
+                                FirebaseFirestore.instance.collection('users');
+                            user.doc(user1.uid).update({
+                              'phone_number': noHp.text,
+                              'address': alamat.text
+                            });
 
-          return Form(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 50,
-                  child: TextFormField(
-                    readOnly: true,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      filled: true,
-                      fillColor: Colors.grey.shade200,
-                      labelStyle: TextStyle(color: color[0].darkblue),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1.5, color: color[0].darkblue),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1.5),
-                      ),
-                      labelText: 'NIK',
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 50,
-                  child: TextFormField(
-                    controller: noHp,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      labelStyle: TextStyle(color: color[0].darkblue),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1.5, color: color[0].darkblue),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1.5),
-                      ),
-                      labelText: 'No Handphone',
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  child: TextFormField(
-                    controller: alamat,
-                    maxLines: 3,
-                    decoration: InputDecoration(
-                      labelStyle: TextStyle(color: color[0].darkblue),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1.5, color: color[0].darkblue),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1.5),
-                      ),
-                      labelText: 'Alamat',
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5))),
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            Icon(Icons.save),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text('Save Changes',
-                                style: TextStyle(fontWeight: FontWeight.w500))
-                          ],
-                        ))
-                  ],
-                )
-              ],
-            ),
-          );
+                            const snackbar = SnackBar(
+                              content: Text('Data Successfully Changed!'),
+                              behavior: SnackBarBehavior.floating,
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackbar);
+                          },
+                          child: Row(
+                            children: [
+                              Icon(Icons.save),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text('Save Changes',
+                                  style: TextStyle(fontWeight: FontWeight.w500))
+                            ],
+                          ))
+                    ],
+                  )
+                ],
+              ),
+            );
+          }
+          return Center(child: CircularProgressIndicator());
         });
   }
 }

@@ -152,7 +152,7 @@ class DataKaryawan extends StatelessWidget {
                                                             .spaceAround,
                                                     children: [
                                                       Text(
-                                                        "${data['cuti']}",
+                                                        "${data['AjuanCuti']['cuti']}",
                                                         style: TextStyle(
                                                             fontSize: 20,
                                                             fontWeight:

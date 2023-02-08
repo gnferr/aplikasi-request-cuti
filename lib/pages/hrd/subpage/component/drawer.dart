@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:tugas_akhir/provider/model/hrdmodel.dart';
 import 'package:tugas_akhir/provider/service/hrd_service.dart';
 
-import '../../../provider/model/color_pallete.dart';
+import '../../../../provider/model/color_pallete.dart';
 
 class DrawerHrd extends StatefulWidget {
   const DrawerHrd({super.key});
@@ -96,33 +97,62 @@ class _DrawerHrdState extends State<DrawerHrd> {
                   TextButton(
                       onPressed: () {
                         showDialog(
-                          context: context,
-                          builder: (ctx) => AlertDialog(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            title: Text("Are you sure?"),
-                            content: Text("Anda yakin ingin keluar? O_o"),
-                            actions: <Widget>[
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: color[0].red),
-                                onPressed: () {
-                                  Navigator.of(ctx).pop();
-                                },
-                                child: Text("Cancel"),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.green),
-                                onPressed: () {
-                                  _logout();
-                                  context.goNamed('login');
-                                },
-                                child: Text("OK"),
-                              ),
-                            ],
-                          ),
-                        );
+                            context: context,
+                            builder: (ctx) => CupertinoAlertDialog(
+                                    title: Text("Are you sure?"),
+                                    content:
+                                        Text("Anda yakin ingin keluar? O_o"),
+                                    actions: <Widget>[
+                                      CupertinoDialogAction(
+                                        child: Text(
+                                          'Cancel',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.red.shade700),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      CupertinoDialogAction(
+                                        child: Text(
+                                          'OK',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.green.shade700),
+                                        ),
+                                        onPressed: () async {
+                                          await FirebaseAuth.instance.signOut();
+                                          context.goNamed('login');
+                                        },
+                                      ),
+                                    ])
+                            // AlertDialog(
+                            //   shape: RoundedRectangleBorder(
+                            //       borderRadius: BorderRadius.circular(10)),
+                            //   title: Text("Are you sure?"),
+                            //   content: Text("Anda yakin ingin keluar? O_o"),
+                            //   actions: <Widget>[
+                            //     ElevatedButton(
+                            //       style: ElevatedButton.styleFrom(
+                            //           backgroundColor: color[0].red),
+                            //       onPressed: () {
+                            //         Navigator.of(ctx).pop();
+                            //       },
+                            //       child: Text("Cancel"),
+                            //     ),
+                            //     ElevatedButton(
+                            //       style: ElevatedButton.styleFrom(
+                            //           backgroundColor: Colors.green),
+                            //       onPressed: () {
+                            //         _logout();
+                            //         context.goNamed('login');
+                            //       },
+                            //       child: Text("OK"),
+                            //     ),
+                            //   ],
+                            // ),
+                            );
                       },
                       child: Text(
                         "Sign Out",

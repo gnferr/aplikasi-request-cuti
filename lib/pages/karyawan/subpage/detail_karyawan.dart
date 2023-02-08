@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tugas_akhir/pages/karyawan/component/detail/body.dart';
-import 'package:tugas_akhir/pages/karyawan/component/detail/header.dart';
+import 'package:tugas_akhir/pages/karyawan/subpage/component/detail/body.dart';
+import 'package:tugas_akhir/pages/karyawan/subpage/component/detail/header.dart';
 
 import '../../../provider/model/color_pallete.dart';
 

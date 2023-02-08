@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tugas_akhir/pages/hrd/component/drawer.dart';
-import 'package:tugas_akhir/pages/hrd/component/hrdcontent.dart';
+import 'package:tugas_akhir/pages/hrd/subpage/component/drawer.dart';
+import 'package:tugas_akhir/pages/hrd/subpage/component/hrdcontent.dart';
 import 'package:tugas_akhir/provider/model/color_pallete.dart';
 import 'package:tugas_akhir/provider/service/hrd_service.dart';
 
