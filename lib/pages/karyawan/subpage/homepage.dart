@@ -11,7 +11,7 @@ class HomeKaryawan extends StatelessWidget {
       child: Column(
         children: [
           Expanded(flex: 1, child: HeaderMainKaryawan()),
-          Expanded(flex: 3, child: MainMenuKaryawan())
+          Expanded(flex: 2, child: MainMenuKaryawan())
         ],
       ),
     );

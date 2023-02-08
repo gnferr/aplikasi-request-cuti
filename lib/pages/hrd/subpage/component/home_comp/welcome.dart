@@ -49,14 +49,14 @@ class _WelcomeHRDState extends State<WelcomeHRD> {
                 margin: EdgeInsets.only(left: 15, top: 15),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(60),
-                    color: Color.fromRGBO(168, 218, 220, 1)),
+                    color: Colors.blueAccent),
               ),
               Container(
                 height: 120,
                 width: 120,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(60),
-                    color: Color.fromRGBO(230, 57, 70, 1)),
+                    color: Colors.deepPurple),
               ),
               Container(
                 margin: EdgeInsets.only(left: 8, top: 8),

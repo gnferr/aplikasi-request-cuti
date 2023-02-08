@@ -54,7 +54,7 @@ class _BodyDetailState extends State<BodyDetail> {
                                 width: 100,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(60),
-                                  color: color[0].red,
+                                  color: Colors.deepPurple,
                                 ),
                               ),
                               Container(
@@ -63,7 +63,7 @@ class _BodyDetailState extends State<BodyDetail> {
                                 width: 100,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(60),
-                                  color: color[0].cyan,
+                                  color: Colors.blueAccent,
                                 ),
                               ),
                               Container(

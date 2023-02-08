@@ -78,8 +78,7 @@ class DataKaryawan extends StatelessWidget {
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
-                                            color:
-                                                Color.fromRGBO(230, 57, 70, 1),
+                                            color: Colors.deepPurple,
                                           ),
                                           height: 80,
                                         )),

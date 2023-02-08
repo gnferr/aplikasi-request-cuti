@@ -12,114 +12,143 @@ class ListMenuHrd extends StatelessWidget {
       color: color[0].white,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Container(
-          decoration: BoxDecoration(
-              color: color[0].grey, borderRadius: BorderRadius.circular(10)),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Wrap(
-              alignment: WrapAlignment.spaceBetween,
-              direction: Axis.horizontal,
-              runSpacing: 20,
-              children: [
-                InkWell(
-                  onTap: (() {
-                    context.goNamed('datakaryawan');
-                  }),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height / 4,
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    decoration: BoxDecoration(
-                        color: color[0].white,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Image.asset(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            direction: Axis.horizontal,
+            runSpacing: 10,
+            children: [
+              InkWell(
+                onTap: () async {
+                  context.goNamed('datakaryawan');
+                },
+                child: Container(
+                  height: 170,
+                  width: 170,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [Colors.deepPurple, Colors.blueAccent]),
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          width: 70,
+                          height: 70,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Image.asset(
                             'assets/images/user_group.png',
-                            scale: 3,
+                            scale: 12,
                             color: color[0].darkblue,
                           ),
-                          Text(
-                            'Data Karyawan',
-                            style: TextStyle(
-                                color: color[0].darkblue,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
-                          )
-                        ],
-                      ),
+                        ),
+                        Text(
+                          'Data Karyawan',
+                          style: TextStyle(
+                              color: color[0].white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        )
+                      ],
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: (() {
-                    context.goNamed("cutiapproval");
-                  }),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height / 4,
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    decoration: BoxDecoration(
-                        color: color[0].white,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Image.asset(
+              ),
+              InkWell(
+                onTap: () async {
+                  context.goNamed('cutiapproval');
+                },
+                child: Container(
+                  height: 170,
+                  width: 170,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [Colors.blueAccent, Colors.deepPurple]),
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          width: 70,
+                          height: 70,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Image.asset(
                             'assets/images/checklist.png',
-                            scale: 3,
+                            scale: 12,
                             color: color[0].darkblue,
                           ),
-                          Text(
-                            'Cuti Approval',
-                            style: TextStyle(
-                                color: color[0].darkblue,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
-                          )
-                        ],
-                      ),
+                        ),
+                        Text(
+                          'Cuti Approval',
+                          style: TextStyle(
+                              color: color[0].white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        )
+                      ],
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: (() {
-                    context.goNamed("calendar");
-                  }),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height / 4,
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    decoration: BoxDecoration(
-                        color: color[0].white,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Image.asset(
+              ),
+              InkWell(
+                onTap: () async {
+                  context.goNamed('calender');
+                },
+                child: Container(
+                  height: 170,
+                  width: 170,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.blueAccent, Colors.deepPurple]),
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          width: 70,
+                          height: 70,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Image.asset(
                             'assets/images/calendar.png',
-                            scale: 3,
+                            scale: 12,
                             color: color[0].darkblue,
                           ),
-                          Text(
-                            'Kalender',
-                            style: TextStyle(
-                                color: color[0].darkblue,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
-                          )
-                        ],
-                      ),
+                        ),
+                        Text(
+                          'Kalender',
+                          style: TextStyle(
+                              color: color[0].white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        )
+                      ],
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

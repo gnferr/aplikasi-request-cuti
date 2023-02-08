@@ -16,9 +16,6 @@ class MainRegister extends StatefulWidget {
   State<MainRegister> createState() => _MainRegisterState();
 }
 
-FirebaseAuth users = FirebaseAuth.instance;
-var userRegis = users.currentUser;
-
 class _MainRegisterState extends State<MainRegister> {
   final _registerFormKey = GlobalKey<FormState>();
   final _nameCt = TextEditingController();
@@ -30,6 +27,8 @@ class _MainRegisterState extends State<MainRegister> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth usersi = FirebaseAuth.instance;
+    var userRegis = usersi.currentUser;
     CollectionReference users = FirebaseFirestore.instance.collection('users');
 
     return Scaffold(

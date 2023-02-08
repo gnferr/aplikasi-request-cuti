@@ -307,7 +307,7 @@ class _BodyyPengajuanCutiState extends State<BodyyPengajuanCuti> {
                                                 ]));
                                   },
                                   style: ElevatedButton.styleFrom(
-                                      backgroundColor: color[0].darkblue,
+                                      backgroundColor: Colors.deepPurple,
                                       fixedSize: Size(
                                           MediaQuery.of(context).size.width,
                                           50),
