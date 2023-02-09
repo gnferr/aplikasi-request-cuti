@@ -35,48 +35,48 @@ class MainLogin extends StatelessWidget {
           ),
           child: Column(
             children: [
-              ElevatedButton(
-                  onPressed: () async {
-                    User? user = await FireAuth.signInWithEmailPassword(
-                        email: 'hrd@gmail.com',
-                        password: 'hrd123',
-                        context: context);
-                    var userlogin = FirebaseFirestore.instance
-                        .collection('users')
-                        .doc(user!.uid)
-                        .get()
-                        .then((DocumentSnapshot documentSnapshot) {
-                      if (documentSnapshot.exists) {
-                        if (documentSnapshot.get('role') == "karyawan") {
-                          context.go("/karyawan");
-                        } else {
-                          context.go("/hrd");
-                        }
-                      }
-                    });
-                  },
-                  child: Text('Login Hrd')),
-              ElevatedButton(
-                  onPressed: () async {
-                    User? user = await FireAuth.signInWithEmailPassword(
-                        email: 'ryan@gmail.com',
-                        password: 'ryan123',
-                        context: context);
-                    var userlogin = FirebaseFirestore.instance
-                        .collection('users')
-                        .doc(user!.uid)
-                        .get()
-                        .then((DocumentSnapshot documentSnapshot) {
-                      if (documentSnapshot.exists) {
-                        if (documentSnapshot.get('role') == "karyawan") {
-                          context.go("/karyawan");
-                        } else {
-                          context.go("/hrd");
-                        }
-                      }
-                    });
-                  },
-                  child: Text('Login Karyawan')),
+              // ElevatedButton(
+              //     onPressed: () async {
+              //       User? user = await FireAuth.signInWithEmailPassword(
+              //           email: 'hrd@gmail.com',
+              //           password: 'hrd123',
+              //           context: context);
+              //       var userlogin = FirebaseFirestore.instance
+              //           .collection('users')
+              //           .doc(user!.uid)
+              //           .get()
+              //           .then((DocumentSnapshot documentSnapshot) {
+              //         if (documentSnapshot.exists) {
+              //           if (documentSnapshot.get('role') == "karyawan") {
+              //             context.go("/karyawan");
+              //           } else {
+              //             context.go("/hrd");
+              //           }
+              //         }
+              //       });
+              //     },
+              //     child: Text('Login Hrd')),
+              // ElevatedButton(
+              //     onPressed: () async {
+              //       User? user = await FireAuth.signInWithEmailPassword(
+              //           email: 'ryan@gmail.com',
+              //           password: 'ryan123',
+              //           context: context);
+              //       var userlogin = FirebaseFirestore.instance
+              //           .collection('users')
+              //           .doc(user!.uid)
+              //           .get()
+              //           .then((DocumentSnapshot documentSnapshot) {
+              //         if (documentSnapshot.exists) {
+              //           if (documentSnapshot.get('role') == "karyawan") {
+              //             context.go("/karyawan");
+              //           } else {
+              //             context.go("/hrd");
+              //           }
+              //         }
+              //       });
+              //     },
+              //     child: Text('Login Karyawan')),
               Expanded(
                   flex: 2,
                   child: Stack(children: [
@@ -295,24 +295,24 @@ class MainLogin extends StatelessWidget {
                                   SizedBox(
                                     height: 15,
                                   ),
-                                  Text.rich(
-                                    TextSpan(
-                                      text: "Don't have an account? ",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500),
-                                      children: [
-                                        TextSpan(
-                                            text: 'Sign Up',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.blue),
-                                            recognizer: TapGestureRecognizer()
-                                              ..onTap = () {
-                                                context.go("/register");
-                                              })
-                                      ],
-                                    ),
-                                  )
+                                  // Text.rich(
+                                  //   TextSpan(
+                                  //     text: "Don't have an account? ",
+                                  //     style: TextStyle(
+                                  //         fontWeight: FontWeight.w500),
+                                  //     children: [
+                                  //       TextSpan(
+                                  //           text: 'Sign Up',
+                                  //           style: TextStyle(
+                                  //               fontWeight: FontWeight.bold,
+                                  //               color: Colors.blue),
+                                  //           recognizer: TapGestureRecognizer()
+                                  //             ..onTap = () {
+                                  //               context.go("/register");
+                                  //             })
+                                  //     ],
+                                  //   ),
+                                  // )
                                 ],
                               ),
                             ),

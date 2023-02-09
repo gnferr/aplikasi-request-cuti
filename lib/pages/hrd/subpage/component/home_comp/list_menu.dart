@@ -107,7 +107,7 @@ class ListMenuHrd extends StatelessWidget {
               ),
               InkWell(
                 onTap: () async {
-                  context.goNamed('calender');
+                  context.goNamed('calendar');
                 },
                 child: Container(
                   height: 170,

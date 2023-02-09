@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../../provider/model/color_pallete.dart';
 
@@ -67,113 +69,149 @@ class DataKaryawan extends StatelessWidget {
                               DocumentSnapshot data =
                                   snapshot.data!.docs[index];
                               if (data['role'] == "karyawan") {
-                                return Stack(
-                                  children: [
-                                    Card(
-                                        shape: RoundedRectangleBorder(
+                                return Slidable(
+                                  endActionPane: ActionPane(
+                                    motion: BehindMotion(),
+                                    children: [
+                                      SlidableAction(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          backgroundColor: Colors.red,
+                                          icon: Icons.delete_forever,
+                                          label: "Delete",
+                                          onPressed: ((context) async {
+                                            await FirebaseFirestore.instance
+                                                .runTransaction((Transaction
+                                                    myTransaction) async {
+                                              await myTransaction.delete(
+                                                  snapshot.data!.docs[index]
+                                                      .reference);
+                                            });
+                                            const snackbar = SnackBar(
+                                              content: Text(
+                                                  'Berhasil Menghapus Data!'),
+                                              behavior:
+                                                  SnackBarBehavior.floating,
+                                            );
+
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackbar);
+                                          }))
+                                    ],
+                                  ),
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Container(
+                                        height: 80,
+                                        decoration: BoxDecoration(
+                                            color: color[0].white,
                                             borderRadius:
                                                 BorderRadius.circular(10)),
-                                        child: Container(
-                                          margin: EdgeInsets.only(top: 7),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: Colors.deepPurple,
-                                          ),
-                                          height: 80,
-                                        )),
-                                    Card(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: Container(
-                                          height: 80,
-                                          decoration: BoxDecoration(
-                                              color: color[0].white,
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      "${data['name']}",
-                                                      style: TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: color[0]
-                                                              .darkblue),
-                                                    ),
-                                                    Text(
-                                                      "${data['email']}",
-                                                      style: TextStyle(
-                                                          color: Colors.grey,
-                                                          fontSize: 15),
-                                                    ),
-                                                  ],
-                                                ),
-                                                // IconButton(
-                                                //     onPressed: () async {
-                                                //       await FirebaseFirestore
-                                                //           .instance
-                                                //           .runTransaction(
-                                                //               (Transaction
-                                                //                   myTransaction) async {
-                                                //         await myTransaction
-                                                //             .delete(snapshot
-                                                //                 .data!
-                                                //                 .docs[index]
-                                                //                 .reference);
-                                                //       });
-                                                //     },
-                                                //     icon: Icon(Icons.delete)),
-                                                Container(
-                                                  height: 60,
-                                                  width: 60,
-                                                  decoration: BoxDecoration(
-                                                      color: color[0].darkblue,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10)),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceAround,
-                                                    children: [
-                                                      Text(
-                                                        "${data['AjuanCuti']['cuti']}",
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color:
-                                                                color[0].white),
-                                                      ),
-                                                      Text(
-                                                        "Hak Cuti",
-                                                        style: TextStyle(
-                                                            fontSize: 13,
-                                                            color:
-                                                                color[0].white),
-                                                      ),
-                                                    ],
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    "${data['name']}",
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            color[0].darkblue),
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                          )),
-                                    ),
-                                  ],
+                                                  Text(
+                                                    "${data['email']}",
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: 15),
+                                                  ),
+                                                ],
+                                              ),
+                                              data["AjuanCuti"]['cuti'] == 0
+                                                  ? Container(
+                                                      height: 60,
+                                                      width: 60,
+                                                      decoration: BoxDecoration(
+                                                          color: color[0].red,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10)),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceAround,
+                                                        children: [
+                                                          Text(
+                                                            "${data['AjuanCuti']['cuti']}",
+                                                            style: TextStyle(
+                                                                fontSize: 20,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: color[0]
+                                                                    .white),
+                                                          ),
+                                                          Text(
+                                                            "Hak Cuti",
+                                                            style: TextStyle(
+                                                                fontSize: 13,
+                                                                color: color[0]
+                                                                    .white),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : Container(
+                                                      height: 60,
+                                                      width: 60,
+                                                      decoration: BoxDecoration(
+                                                          color:
+                                                              color[0].darkblue,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10)),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceAround,
+                                                        children: [
+                                                          Text(
+                                                            "${data['AjuanCuti']['cuti']}",
+                                                            style: TextStyle(
+                                                                fontSize: 20,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: color[0]
+                                                                    .white),
+                                                          ),
+                                                          Text(
+                                                            "Hak Cuti",
+                                                            style: TextStyle(
+                                                                fontSize: 13,
+                                                                color: color[0]
+                                                                    .white),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )
+                                            ],
+                                          ),
+                                        )),
+                                  ),
                                 );
                               } else {
                                 return Container();

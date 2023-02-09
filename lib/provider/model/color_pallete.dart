@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// Model Colors // sedikit ada guna
 class ColorPallete {
   Color red;
   Color white;

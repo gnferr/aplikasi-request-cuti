@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:tugas_akhir/provider/model/hrdmodel.dart';
 
-// Provider Drawer HRD
+// Provider Drawer HRD // ga ada guna //
 class ServiceHrd with ChangeNotifier {
   int _index = 0;
   List<bool> _selected = [true, false, false];

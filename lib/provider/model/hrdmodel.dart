@@ -3,6 +3,7 @@ import 'package:tugas_akhir/pages/hrd/subpage/approval_page.dart';
 import 'package:tugas_akhir/pages/hrd/subpage/datakaryawan.dart';
 import 'package:tugas_akhir/pages/hrd/subpage/home.dart';
 
+// Model Drawer HRD // untuk sekarang ga ada guna
 class HrdItem {
   IconData icons;
   String title;
