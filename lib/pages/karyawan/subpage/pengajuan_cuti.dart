@@ -68,12 +68,31 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
                   scrollDirection: Axis.vertical,
                   child: Column(
                     children: [
-                      snapshot.data!['AjuanCuti']['getcuti'] > 0
-                          ? Container(
-                              height: MediaQuery.of(context).size.height / 5.2,
-                              width: MediaQuery.of(context).size.width,
-                              child: KeteranganPengajuan())
-                          : Container(),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: color[0].grey,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: snapshot.data!['AjuanCuti']['getcuti'] > 0
+                              ? Container(
+                                  height:
+                                      MediaQuery.of(context).size.height / 5.2,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: KeteranganPengajuan())
+                              : Container(
+                                  child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 69, bottom: 69),
+                                    child: Text(
+                                        "Tidak dalam status pengajuan cuti!",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500)),
+                                  ),
+                                )),
+                        ),
+                      ),
                       Container(
                           height: MediaQuery.of(context).size.height / 1.4,
                           width: MediaQuery.of(context).size.width,

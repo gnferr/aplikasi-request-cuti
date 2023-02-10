@@ -27,10 +27,11 @@ class ListMenuHrd extends StatelessWidget {
                   height: 170,
                   width: 170,
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [Colors.deepPurple, Colors.blueAccent]),
+                      color: color[0].blue,
+                      // gradient: LinearGradient(
+                      //     begin: Alignment.centerLeft,
+                      //     end: Alignment.centerRight,
+                      //     colors: [Colors.deepPurple, Colors.blueAccent]),
                       borderRadius: BorderRadius.circular(15)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -70,10 +71,11 @@ class ListMenuHrd extends StatelessWidget {
                   height: 170,
                   width: 170,
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [Colors.blueAccent, Colors.deepPurple]),
+                      color: color[0].darkblue,
+                      // gradient: LinearGradient(
+                      //     begin: Alignment.centerLeft,
+                      //     end: Alignment.centerRight,
+                      //     colors: [Colors.blueAccent, Colors.deepPurple]),
                       borderRadius: BorderRadius.circular(15)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -113,10 +115,7 @@ class ListMenuHrd extends StatelessWidget {
                   height: 170,
                   width: 170,
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [Colors.blueAccent, Colors.deepPurple]),
+                      color: color[0].darkblue,
                       borderRadius: BorderRadius.circular(15)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -148,6 +147,44 @@ class ListMenuHrd extends StatelessWidget {
                   ),
                 ),
               ),
+              // InkWell(
+              //   onTap: () async {},
+              //   child: Container(
+              //     height: 170,
+              //     width: 170,
+              //     decoration: BoxDecoration(
+              //         color: color[0].blue,
+              //         borderRadius: BorderRadius.circular(15)),
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: Column(
+              //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //         children: [
+              //           Container(
+              //             width: 70,
+              //             height: 70,
+              //             decoration: BoxDecoration(
+              //               color: Colors.white,
+              //               borderRadius: BorderRadius.circular(50),
+              //             ),
+              //             child: Image.asset(
+              //               'assets/images/users.png',
+              //               scale: 12,
+              //               color: color[0].darkblue,
+              //             ),
+              //           ),
+              //           Text(
+              //             'Profile',
+              //             style: TextStyle(
+              //                 color: color[0].white,
+              //                 fontSize: 18,
+              //                 fontWeight: FontWeight.w600),
+              //           )
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

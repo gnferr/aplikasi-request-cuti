@@ -18,6 +18,7 @@ class _BodyDetailState extends State<BodyDetail> {
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
     print(user!.uid);
+
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Container(
@@ -47,34 +48,14 @@ class _BodyDetailState extends State<BodyDetail> {
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
                         children: [
-                          Stack(
-                            children: [
-                              Container(
-                                height: 100,
-                                width: 100,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(60),
-                                  color: Colors.deepPurple,
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 11, left: 11),
-                                height: 100,
-                                width: 100,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(60),
-                                  color: Colors.blueAccent,
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 5, left: 5),
-                                child: CircleAvatar(
-                                  radius: 50,
-                                  backgroundImage:
-                                      NetworkImage("${user.photoURL}"),
-                                ),
-                              ),
-                            ],
+                          CircleAvatar(
+                            radius: 55,
+                            backgroundColor: color[0].darkblue,
+                            child: CircleAvatar(
+                              radius: 50,
+                              backgroundImage: NetworkImage(
+                                  "https://media.vanityfair.fr/photos/60d3507cb5f615de15ffe813/16:9/w_2560%2Cc_limit/vf_ryan_gosling_9793.jpeg"),
+                            ),
                           ),
                           SizedBox(
                             height: 20,
@@ -279,6 +260,7 @@ class _ColumInputanState extends State<ColumInputan> {
                             });
 
                             const snackbar = SnackBar(
+                              backgroundColor: Colors.green,
                               content: Text('Data Successfully Changed!'),
                               behavior: SnackBarBehavior.floating,
                             );

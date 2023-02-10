@@ -46,7 +46,7 @@ class KeteranganPengajuan extends StatelessWidget {
             }
 
             return Padding(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(8),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,7 +85,7 @@ class KeteranganPengajuan extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        width: 20,
+                        width: 10,
                       ),
                       Row(
                         children: [
@@ -112,7 +112,7 @@ class KeteranganPengajuan extends StatelessWidget {
                           // decoration: BoxDecoration(
                           //     color: Colors.grey.shade100,
                           //     borderRadius: BorderRadius.circular(5)),
-                          height: 40,
+                          height: 30,
                           width: MediaQuery.of(context).size.width / 2,
                           child: Text(
                             snapshot.data!['AjuanCuti']['description'],
@@ -120,7 +120,6 @@ class KeteranganPengajuan extends StatelessWidget {
                           ))
                     ],
                   ),
-                  Divider()
                 ],
               ),
             );

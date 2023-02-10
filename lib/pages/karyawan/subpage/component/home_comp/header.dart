@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../provider/model/color_pallete.dart';
 
@@ -17,55 +18,49 @@ class _HeaderMainKaryawanState extends State<HeaderMainKaryawan> {
   Widget build(BuildContext context) {
     return Container(
       color: color[0].white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Column(
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Text(
+              DateFormat('EEEE, dd MMMM yyyy')
+                  .format(DateTime.now())
+                  .toString(),
+              style: TextStyle(
+                  fontWeight: FontWeight.w500, color: color[0].darkblue)),
+          SizedBox(height: 15),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(
-                "Welcome,",
-                style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                    color: color[0].darkblue),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Welcome,",
+                    style: TextStyle(
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                        color: color[0].darkblue),
+                  ),
+                  Text(
+                    "${user!.displayName}",
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: color[0].darkblue),
+                  ),
+                ],
               ),
-              Text(
-                "${user!.displayName}",
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: color[0].darkblue),
-              ),
-            ],
-          ),
-          Stack(
-            children: [
-              Container(
-                height: 120,
-                width: 120,
-                margin: EdgeInsets.only(left: 15, top: 15),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(60),
-                    color: Colors.blueAccent),
-              ),
-              Container(
-                height: 120,
-                width: 120,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(60),
-                    color: Colors.deepPurple),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 8, top: 8),
+              CircleAvatar(
+                radius: 65,
+                backgroundColor: color[0].darkblue,
                 child: CircleAvatar(
                   radius: 60,
-                  backgroundImage: NetworkImage("${user!.photoURL}"),
+                  backgroundImage: NetworkImage(
+                      "https://media.vanityfair.fr/photos/60d3507cb5f615de15ffe813/16:9/w_2560%2Cc_limit/vf_ryan_gosling_9793.jpeg"),
                 ),
-              ),
+              )
             ],
-          )
+          ),
         ],
       ),
     );

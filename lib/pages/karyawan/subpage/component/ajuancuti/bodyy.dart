@@ -17,7 +17,7 @@ class BodyyPengajuanCuti extends StatefulWidget {
 class _BodyyPengajuanCutiState extends State<BodyyPengajuanCuti> {
   DateTimeRange dateRange = DateTimeRange(
     start: DateTime.now(),
-    end: DateTime(2023, 02, 10),
+    end: DateTime.now().add(Duration(days: 2)),
   );
 
   @override
@@ -206,6 +206,35 @@ class _BodyyPengajuanCutiState extends State<BodyyPengajuanCuti> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50))),
                               child: Text('Submit'))
+                        ] else if (dateRange.duration.inDays >
+                            snapshot.data!['AjuanCuti']['cuti']) ...[
+                          ElevatedButton(
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => CupertinoAlertDialog(
+                                          title: Column(
+                                            children: [
+                                              Text("Warning!",
+                                                  style:
+                                                      TextStyle(fontSize: 20)),
+                                              Image.network(
+                                                'https://cdn-icons-png.flaticon.com/512/595/595067.png',
+                                                scale: 8,
+                                              ),
+                                            ],
+                                          ),
+                                          content: Text(
+                                              "Pengajuan Cuti Tidak bisa lebih besar dari sisa cuti anda!"),
+                                        ));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: color[0].darkblue,
+                                  fixedSize: Size(
+                                      MediaQuery.of(context).size.width, 50),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50))),
+                              child: Text('Submit'))
                         ] else ...[
                           snapshot.data!['AjuanCuti']['status'] == 'accepted'
                               ? ElevatedButton(
@@ -291,6 +320,8 @@ class _BodyyPengajuanCutiState extends State<BodyyPengajuanCuti> {
                                                       });
 
                                                       const snackbar = SnackBar(
+                                                        backgroundColor:
+                                                            Colors.green,
                                                         content: Text(
                                                             'Pengajuan Cuti Success Terkirim!'),
                                                         behavior:
@@ -307,7 +338,7 @@ class _BodyyPengajuanCutiState extends State<BodyyPengajuanCuti> {
                                                 ]));
                                   },
                                   style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.deepPurple,
+                                      backgroundColor: color[0].darkblue,
                                       fixedSize: Size(
                                           MediaQuery.of(context).size.width,
                                           50),

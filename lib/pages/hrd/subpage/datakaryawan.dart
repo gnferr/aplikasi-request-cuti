@@ -81,21 +81,27 @@ class DataKaryawan extends StatelessWidget {
                                           label: "Delete",
                                           onPressed: ((context) async {
                                             await FirebaseFirestore.instance
-                                                .runTransaction((Transaction
-                                                    myTransaction) async {
-                                              await myTransaction.delete(
-                                                  snapshot.data!.docs[index]
-                                                      .reference);
-                                            });
-                                            const snackbar = SnackBar(
-                                              content: Text(
-                                                  'Berhasil Menghapus Data!'),
-                                              behavior:
-                                                  SnackBarBehavior.floating,
-                                            );
+                                                .collection('users')
+                                                .doc(snapshot
+                                                    .data!.docs[index].id)
+                                                .delete();
+                                            // await FirebaseFirestore.instance
+                                            //     .runTransaction((Transaction
+                                            //         myTransaction) async {
+                                            //   await myTransaction.delete(
+                                            //       snapshot.data!.docs[index]
+                                            //           .reference);
+                                            // });
+                                            // const snackbar = SnackBar(
+                                            //   backgroundColor: Colors.green,
+                                            //   content: Text(
+                                            //       'Berhasil Menghapus Data!'),
+                                            //   behavior:
+                                            //       SnackBarBehavior.floating,
+                                            // );
 
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(snackbar);
+                                            // await ScaffoldMessenger.of(context)
+                                            //     .showSnackBar(snackbar);
                                           }))
                                     ],
                                   ),

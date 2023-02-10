@@ -1,9 +1,12 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+
 import 'package:tugas_akhir/provider/auth/validator.dart';
 
 import '../../firebase_options.dart';
@@ -247,40 +250,68 @@ class MainLogin extends StatelessWidget {
                                                       password:
                                                           _passwordText.text,
                                                       context: context);
-                                              var userlogin = FirebaseFirestore
-                                                  .instance
-                                                  .collection('users')
-                                                  .doc(user!.uid)
-                                                  .get()
-                                                  .then((DocumentSnapshot
-                                                      documentSnapshot) {
-                                                if (documentSnapshot.exists) {
-                                                  if (documentSnapshot
-                                                          .get('role') ==
-                                                      "karyawan") {
-                                                    context.go("/karyawan");
-                                                  } else {
-                                                    context.go("/hrd");
+                                              if (user?.uid == null) {
+                                                final snackBar = SnackBar(
+                                                  /// need to set following properties for best effect of awesome_snackbar_content
+                                                  elevation: 0,
+
+                                                  behavior:
+                                                      SnackBarBehavior.floating,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  content:
+                                                      AwesomeSnackbarContent(
+                                                    title: 'On Snap!',
+                                                    message:
+                                                        'Something went wrong. Please check your credentials and try again!',
+
+                                                    /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                                                    contentType:
+                                                        ContentType.failure,
+                                                  ),
+                                                );
+
+                                                ScaffoldMessenger.of(context)
+                                                  ..hideCurrentSnackBar()
+                                                  ..showSnackBar(snackBar);
+                                              } else {
+                                                var userlogin =
+                                                    FirebaseFirestore.instance
+                                                        .collection('users')
+                                                        .doc(user?.uid)
+                                                        .get()
+                                                        .then((DocumentSnapshot
+                                                            documentSnapshot) {
+                                                  if (documentSnapshot.exists) {
+                                                    if (documentSnapshot
+                                                            .get('role') ==
+                                                        "karyawan") {
+                                                      context.go("/karyawan");
+                                                    } else {
+                                                      context.go("/hrd");
+                                                    }
                                                   }
-                                                }
-                                              });
-                                              showDialog(
-                                                context: context,
-                                                builder: (context) =>
-                                                    AlertDialog(
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                        ),
-                                                        elevation: 0,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        content: Center(
-                                                            child:
-                                                                CircularProgressIndicator())),
-                                              );
+                                                });
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      AlertDialog(
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                          ),
+                                                          elevation: 0,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          content: Center(
+                                                              child:
+                                                                  CircularProgressIndicator())),
+                                                );
+                                              }
                                             }
                                             // signIn(_emailText.text,
                                             //     _passwordText.text);
@@ -295,24 +326,25 @@ class MainLogin extends StatelessWidget {
                                   SizedBox(
                                     height: 15,
                                   ),
-                                  // Text.rich(
-                                  //   TextSpan(
-                                  //     text: "Don't have an account? ",
-                                  //     style: TextStyle(
-                                  //         fontWeight: FontWeight.w500),
-                                  //     children: [
-                                  //       TextSpan(
-                                  //           text: 'Sign Up',
-                                  //           style: TextStyle(
-                                  //               fontWeight: FontWeight.bold,
-                                  //               color: Colors.blue),
-                                  //           recognizer: TapGestureRecognizer()
-                                  //             ..onTap = () {
-                                  //               context.go("/register");
-                                  //             })
-                                  //     ],
-                                  //   ),
-                                  // )
+                                  Text.rich(
+                                    TextSpan(
+                                      text: "Don't have an account? ",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white),
+                                      children: [
+                                        TextSpan(
+                                            text: 'Sign Up',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () {
+                                                context.go("/register");
+                                              })
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
                             ),

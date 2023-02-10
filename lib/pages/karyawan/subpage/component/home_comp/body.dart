@@ -28,10 +28,7 @@ class MainMenuKaryawan extends StatelessWidget {
                   height: 170,
                   width: 170,
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [Colors.deepPurple, Colors.blueAccent]),
+                      color: color[0].darkblue,
                       borderRadius: BorderRadius.circular(20)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -71,10 +68,7 @@ class MainMenuKaryawan extends StatelessWidget {
                   height: 170,
                   width: 170,
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [Colors.blueAccent, Colors.deepPurple]),
+                      color: color[0].blue,
                       borderRadius: BorderRadius.circular(20)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -114,10 +108,7 @@ class MainMenuKaryawan extends StatelessWidget {
                   height: 170,
                   width: 170,
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [Colors.blueAccent, Colors.deepPurple]),
+                      color: color[0].blue,
                       borderRadius: BorderRadius.circular(20)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
