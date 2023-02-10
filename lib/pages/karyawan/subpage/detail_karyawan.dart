@@ -11,7 +11,7 @@ class InformasiSaya extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Informasi Saya',
+          title: Text('My Profile',
               style: TextStyle(
                   fontWeight: FontWeight.w500, color: color[0].darkblue)),
           iconTheme: IconThemeData(color: color[0].darkblue),

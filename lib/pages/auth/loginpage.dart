@@ -126,7 +126,7 @@ class MainLogin extends StatelessWidget {
                         children: <Widget>[
                           // Stroked text as border.
                           Text(
-                            'Management',
+                            'Employees',
                             style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontSize: 33,
@@ -138,7 +138,7 @@ class MainLogin extends StatelessWidget {
                           ),
                           // Solid text as fill.
                           Text(
-                            'Management',
+                            'Employees',
                             style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontSize: 33,
@@ -155,7 +155,7 @@ class MainLogin extends StatelessWidget {
                           children: <Widget>[
                             // Stroked text as border.
                             Text(
-                              'Karyawan',
+                              'Management',
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 33,
@@ -167,7 +167,7 @@ class MainLogin extends StatelessWidget {
                             ),
                             // Solid text as fill.
                             Text(
-                              'Karyawan',
+                              'Management',
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 33,

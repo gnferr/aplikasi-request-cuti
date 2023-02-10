@@ -24,7 +24,7 @@ class MainHrd extends StatelessWidget {
           elevation: 0,
           backgroundColor: color[0].white,
           title: Text(
-            "Management Karyawan",
+            "Employees Management",
             style: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
           ),
           actions: [
@@ -34,7 +34,7 @@ class MainHrd extends StatelessWidget {
                       context: context,
                       builder: (ctx) => CupertinoAlertDialog(
                               title: Text("Are you sure?"),
-                              content: Text("Anda yakin ingin keluar? O_o"),
+                              content: Text("Are you sure want to send? O_o"),
                               actions: <Widget>[
                                 CupertinoDialogAction(
                                   child: Text(

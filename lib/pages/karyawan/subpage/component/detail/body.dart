@@ -91,7 +91,7 @@ class _BodyDetailState extends State<BodyDetail> {
                                                 borderSide:
                                                     BorderSide(width: 1.5),
                                               ),
-                                              labelText: 'Nama Lengkap',
+                                              labelText: 'Full Name',
                                             ),
                                           ),
                                         ),
@@ -148,10 +148,14 @@ class _BodyDetailState extends State<BodyDetail> {
                                                 fontSize: 40,
                                                 fontWeight: FontWeight.bold,
                                                 color: color[0].white)),
-                                        Text('Hak Cuti',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                color: color[0].grey))
+                                        Text(
+                                          'Leave Remaining',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              color: color[0].grey),
+                                          overflow: TextOverflow.clip,
+                                          textAlign: TextAlign.center,
+                                        )
                                       ],
                                     ),
                                   )
@@ -216,7 +220,7 @@ class _ColumInputanState extends State<ColumInputan> {
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(width: 1.5),
                         ),
-                        labelText: 'No Handphone',
+                        labelText: 'Phone Number',
                       ),
                     ),
                   ),
@@ -236,7 +240,7 @@ class _ColumInputanState extends State<ColumInputan> {
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(width: 1.5),
                         ),
-                        labelText: 'Alamat',
+                        labelText: 'Address',
                       ),
                     ),
                   ),

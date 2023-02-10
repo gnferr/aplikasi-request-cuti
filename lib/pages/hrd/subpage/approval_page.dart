@@ -48,7 +48,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Cuti',
+                                'Leave',
                                 style: TextStyle(
                                     fontSize: 30,
                                     fontWeight: FontWeight.bold,
@@ -243,7 +243,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                                       title: Text(
                                                                           "Are you sure?"),
                                                                       content: Text(
-                                                                          "Anda akan menolak pengajuan cuti ini!"),
+                                                                          "You will reject this leave request!"),
                                                                       actions: <
                                                                           Widget>[
                                                                         CupertinoDialogAction(
@@ -267,7 +267,8 @@ class _ApprovalPageState extends State<ApprovalPage> {
 
                                                                             const snackbar =
                                                                                 SnackBar(
-                                                                              content: Text('Berhasil Menolak Ajuan Cuti!'),
+                                                                              backgroundColor: Colors.green,
+                                                                              content: Text('Successfully rejected this leave request!'),
                                                                               behavior: SnackBarBehavior.floating,
                                                                             );
                                                                             Navigator.pop(context);
@@ -302,7 +303,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                                       title: Text(
                                                                           "Are you sure?"),
                                                                       content: Text(
-                                                                          "Anda akan menerima pengajuan cuti ini!"),
+                                                                          "You will accept this leave request!"),
                                                                       actions: <
                                                                           Widget>[
                                                                         CupertinoDialogAction(
@@ -327,7 +328,8 @@ class _ApprovalPageState extends State<ApprovalPage> {
 
                                                                             const snackbar =
                                                                                 SnackBar(
-                                                                              content: Text('Berhasil Menerima Ajuan Cuti!'),
+                                                                              backgroundColor: Colors.green,
+                                                                              content: Text('Successfully accept this leave request!'),
                                                                               behavior: SnackBarBehavior.floating,
                                                                             );
                                                                             Navigator.pop(context);
@@ -388,7 +390,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                                     title: Text(
                                                                         "Are you sure?"),
                                                                     content: Text(
-                                                                        "Anda akan menghapus data ini!"),
+                                                                        "You will delete this data!"),
                                                                     actions: <
                                                                         Widget>[
                                                                       CupertinoDialogAction(
@@ -422,7 +424,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                                           const snackbar =
                                                                               SnackBar(
                                                                             content:
-                                                                                Text('Berhasil Menghapus Ajuan Cuti!'),
+                                                                                Text('Successfully deleted!'),
                                                                             behavior:
                                                                                 SnackBarBehavior.floating,
                                                                           );

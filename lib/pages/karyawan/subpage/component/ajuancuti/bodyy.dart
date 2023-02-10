@@ -74,7 +74,7 @@ class _BodyyPengajuanCutiState extends State<BodyyPengajuanCuti> {
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(25),
                               topLeft: Radius.circular(25))),
-                      labelText: 'Nama',
+                      labelText: 'Full Name',
                     ),
                   ),
                   SizedBox(
@@ -169,7 +169,7 @@ class _BodyyPengajuanCutiState extends State<BodyyPengajuanCuti> {
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(25),
                               bottomRight: Radius.circular(25))),
-                      labelText: 'Perihal Cuti',
+                      labelText: 'Leave Details',
                     ),
                   ),
                   SizedBox(
@@ -196,7 +196,7 @@ class _BodyyPengajuanCutiState extends State<BodyyPengajuanCuti> {
                                             ],
                                           ),
                                           content: Text(
-                                              "Hak Cuti anda telah habis!"),
+                                              "Your leave entitlement has expired!"),
                                         ));
                               },
                               style: ElevatedButton.styleFrom(
@@ -225,7 +225,7 @@ class _BodyyPengajuanCutiState extends State<BodyyPengajuanCuti> {
                                             ],
                                           ),
                                           content: Text(
-                                              "Pengajuan Cuti Tidak bisa lebih besar dari sisa cuti anda!"),
+                                              "Leave requests should not be greater than your remaining leave!"),
                                         ));
                               },
                               style: ElevatedButton.styleFrom(
@@ -274,7 +274,7 @@ class _BodyyPengajuanCutiState extends State<BodyyPengajuanCuti> {
                                         builder: (ctx) => CupertinoAlertDialog(
                                                 title: Text("Are you sure?"),
                                                 content: Text(
-                                                    "Anda yakin ingin mengirim? O_o"),
+                                                    "Are you sure want to send? O_o"),
                                                 actions: <Widget>[
                                                   CupertinoDialogAction(
                                                     child: Text(
@@ -323,7 +323,7 @@ class _BodyyPengajuanCutiState extends State<BodyyPengajuanCuti> {
                                                         backgroundColor:
                                                             Colors.green,
                                                         content: Text(
-                                                            'Pengajuan Cuti Success Terkirim!'),
+                                                            'Leave application successfully submited!'),
                                                         behavior:
                                                             SnackBarBehavior
                                                                 .floating,
@@ -384,7 +384,8 @@ class _BodyyPengajuanCutiState extends State<BodyyPengajuanCuti> {
                       ),
                     ],
                   ),
-                  content: Text("Pengajuan Cuti hanya berlaku Senin - Jum'at"),
+                  content:
+                      Text("Leave application are only valid on weekdays!"),
                 ));
       } else {
         if (newDateRange.duration.inDays > 12) {
@@ -401,7 +402,7 @@ class _BodyyPengajuanCutiState extends State<BodyyPengajuanCuti> {
                         ),
                       ],
                     ),
-                    content: Text("Melebihi Batas Maximum Pengajuan!"),
+                    content: Text("Exceeds the maximum application limit!"),
                   ));
         } else {
           setState(() {

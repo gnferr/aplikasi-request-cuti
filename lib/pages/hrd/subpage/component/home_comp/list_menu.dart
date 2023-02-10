@@ -52,7 +52,7 @@ class ListMenuHrd extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Data Karyawan',
+                          'Employees Data',
                           style: TextStyle(
                               color: color[0].white,
                               fontSize: 18,
@@ -96,7 +96,7 @@ class ListMenuHrd extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Cuti Approval',
+                          'Leave Approval',
                           style: TextStyle(
                               color: color[0].white,
                               fontSize: 18,
@@ -136,7 +136,7 @@ class ListMenuHrd extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Kalender',
+                          'Calendar',
                           style: TextStyle(
                               color: color[0].white,
                               fontSize: 18,

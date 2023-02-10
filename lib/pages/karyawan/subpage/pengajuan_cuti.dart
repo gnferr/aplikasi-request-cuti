@@ -27,7 +27,7 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
         iconTheme: IconThemeData(color: color[0].darkblue),
         backgroundColor: color[0].white,
         title: Text(
-          "Pengajuan Cuti",
+          "Leave Application",
           style: TextStyle(color: color[0].darkblue),
         ),
         elevation: 0,

@@ -26,7 +26,7 @@ class _MainKaryawanState extends State<MainKaryawan> {
                   context: context,
                   builder: (ctx) => CupertinoAlertDialog(
                     title: Text("Are you sure?"),
-                    content: Text("Anda yakin ingin keluar? O_o"),
+                    content: Text("Are you sure want to send? O_o"),
                     actions: <Widget>[
                       CupertinoDialogAction(
                         child: Text(

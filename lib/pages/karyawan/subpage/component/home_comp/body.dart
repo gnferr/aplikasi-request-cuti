@@ -49,7 +49,7 @@ class MainMenuKaryawan extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Informasi Saya',
+                          'My Profile',
                           style: TextStyle(
                               color: color[0].white,
                               fontSize: 18,
@@ -89,7 +89,7 @@ class MainMenuKaryawan extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Pengajuan Cuti',
+                          'Leave Application',
                           style: TextStyle(
                               color: color[0].white,
                               fontSize: 18,
@@ -129,7 +129,7 @@ class MainMenuKaryawan extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Kalender',
+                          'Calendar',
                           style: TextStyle(
                               color: color[0].white,
                               fontSize: 18,
